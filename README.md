@@ -113,7 +113,7 @@
         <!-- Indice -->
         <div id="hint">
             💡 Indice : Le prénom fait partie d'un nom composé d'une ville de Bretagne.
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Drapeau_de_la_Bretagne_%28Gwenn_ha_du%29.svg/320px-Drapeau_de_la_Bretagne_%28Gwenn_ha_du%29.svg.png" alt="Drapeau breton">
+            <"https://www.arsincute.com/wp-content/uploads/2020/11/drapeau-600x400.jpg">
         </div>
 
         <div id="babyResult">
