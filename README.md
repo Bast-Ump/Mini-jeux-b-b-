@@ -1,4 +1,3 @@
-# Mini-jeux-b-b-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -74,6 +73,24 @@
         width: 80%;
         max-width: 300px;
     }
+    #hint {
+        margin-top: 20px;
+        padding: 10px;
+        background: #fff3cd;
+        border: 1px solid #ffecb5;
+        border-radius: 8px;
+        color: #795548;
+        font-weight: bold;
+        display: none;
+        animation: fadeIn 1s ease-in-out;
+    }
+    #hint img {
+        display: block;
+        margin: 10px auto 0 auto;
+        width: 80px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+    }
     @keyframes fadeIn {
         from {opacity: 0;}
         to {opacity: 1;}
@@ -85,13 +102,19 @@
     <h1>🪢 Jeu du Pendu - Spécial bébé 👶</h1>
 
     <div id="game">
-        <p>Devine le mot caché !</p>
+        <p>Devine le prénom caché !</p>
         <div id="wordDisplay">_ _ _ _</div>
         <input type="text" id="letterInput" maxlength="1" placeholder="Lettre...">
         <button id="guessBtn">Proposer</button>
         <div id="lettersUsed"></div>
         <div id="pendu"></div>
         <div id="message"></div>
+
+        <!-- Indice -->
+        <div id="hint">
+            💡 Indice : Le prénom fait partie d'un nom composé d'une ville de Bretagne.
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Drapeau_de_la_Bretagne_%28Gwenn_ha_du%29.svg/320px-Drapeau_de_la_Bretagne_%28Gwenn_ha_du%29.svg.png" alt="Drapeau breton">
+        </div>
 
         <div id="babyResult">
             <h3>💞 Résultat 💞</h3>
@@ -107,7 +130,7 @@
 </div>
 
 <script>
-const secretWord = "malo"; // Mot défini
+const secretWord = "malo"; // prénom défini
 let displayWord = Array(secretWord.length).fill("_");
 let lettersUsed = [];
 let errors = 0;
@@ -121,6 +144,7 @@ const penduDiv = document.getElementById('pendu');
 const messageDiv = document.getElementById('message');
 const restartBtn = document.getElementById('restartBtn');
 const babyResult = document.getElementById('babyResult');
+const hintDiv = document.getElementById('hint');
 
 const penduStages = [
     `
@@ -193,6 +217,10 @@ function guessLetter() {
         }
     } else {
         errors++;
+        // 🔥 Affiche l'indice après 3 erreurs
+        if(errors === 3) {
+            hintDiv.style.display = "block";
+        }
     }
 
     updateDisplay();
@@ -202,7 +230,7 @@ function guessLetter() {
         messageDiv.textContent = "🎉 Bravo ! Tu as trouvé MALO !";
         endGame();
     } else if(errors >= maxErrors) {
-        messageDiv.textContent = "💀 Perdu ! Le mot était : MALO";
+        messageDiv.textContent = "💀 Perdu ! Le prénom était : MALO";
         endGame();
     }
 }
@@ -217,6 +245,7 @@ function endGame() {
     guessBtn.disabled = true;
     letterInput.disabled = true;
     restartBtn.style.display = "inline-block";
+    hintDiv.style.display = "none"; // cacher l'indice à la fin
 
     // Afficher le résultat bébé après 2 secondes
     setTimeout(() => {
@@ -233,6 +262,7 @@ restartBtn.addEventListener('click', () => {
     restartBtn.style.display = "none";
     messageDiv.textContent = "";
     babyResult.style.display = "none";
+    hintDiv.style.display = "none";
     updateDisplay();
 });
 
@@ -240,8 +270,3 @@ updateDisplay();
 </script>
 </body>
 </html>
-
-https://github.com/Bast-Ump/Mini-jeux-b-b-
-
-[googlef635895ff3dbf79d (3).html](https://github.com/user-attachments/files/23291046/googlef635895ff3dbf79d.3.html)
-
